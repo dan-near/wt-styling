@@ -1,5 +1,7 @@
 ## Account Identifiers
 
+### Algorand Addresses
+
 Algorand addresses are derived from the account's original public key, appended with a checksum, and encoded in base 32: `IJ3G6V2QVF5FATT724TDL3FL6GJQ3OKMA3EWLB56EVRSPYMSUI4LL5P4YE`
 
 ### NEAR Account IDs
