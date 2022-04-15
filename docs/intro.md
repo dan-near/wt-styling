@@ -12,4 +12,4 @@ The interactive course with quizzes will guide you through everything you need t
 
 If you have questions about anything related to NEAR, you're always welcome to ask our community on [StackOverflow](https://stackoverflow.com/questions/tagged/nearprotocol) and Discord ([NEAR Discord](https://near.chat/) and [NEAR University Discord](https://discord.gg/k4pxafjMWA)).
 
-**Click the "Next" button below to get started!**
+**Click the "Next »" button below to get started!**
