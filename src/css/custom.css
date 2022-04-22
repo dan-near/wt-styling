@@ -6,25 +6,29 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #6b6ef9;
+  --ifm-color-primary-dark: #494cf8;
+  --ifm-color-primary-darker: #383cf7;
+  --ifm-color-primary-darkest: #0a0fef;
+  --ifm-color-primary-light: #8d90fa;
+  --ifm-color-primary-lighter: #9ea0fb;
+  --ifm-color-primary-lightest: #d2d3fd;
   --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'Manrope';
+  --ifm-global-spacing: 2rem;
+  --ifm-menu-color: var(--ifm-color-emphasis-1000);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #5f8afa;
+  --ifm-color-primary-dark: #4e7ef9;
+  --ifm-color-primary-darker: #4e7ef9;
+  --ifm-color-primary-darkest: #4e7ef9;
+  --ifm-color-primary-light: #7096fb;
+  --ifm-color-primary-lighter: #80a2fb;
+  --ifm-color-primary-lightest: #91affc;
+  --ifm-menu-color: var(--ifm-color-emphasis-1000);
 }
 
 .docusaurus-highlight-code-line {
@@ -36,4 +40,107 @@
 
 [data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+p {
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+a {
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+.menu__link {
+  line-height: 1.5;
+}
+
+.breadcrumbs__link {
+  border-radius: none;
+  padding: 0;
+}
+
+.breadcrumbs__item--active .breadcrumbs__link,
+.breadcrumbs__item:not(.breadcrumbs__item--active):hover .breadcrumbs__link {
+  background: none;
+}
+
+.menu__link--sublist-caret:after {
+  background: var(--ifm-menu-link-sublist-icon) 50%/1.25rem 1.25rem;
+}
+
+.menu__list-item-collapsible {
+  font-weight: 900 !important;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.menu__list .menu__list {
+  font-size: 0.85rem;
+}
+
+code {
+  border-radius: 4px;
+  padding-right: 0.35rem;
+  padding-left: 0.35rem;
+}
+
+.alert {
+  background-color: var(--ifm-alert-background-color);
+  border-style: solid;
+  border-width: var(--ifm-alert-border-width);
+  border-radius: 4px;
+  color: var(--ifm-alert-foreground-color);
+  padding: 0.75rem;
+  box-shadow: none;
+}
+
+blockquote {
+  font-style: italic;
+}
+
+.navbar {
+  box-shadow: none;
+  height: 5rem;
+}
+
+.row .col {
+  padding-left: 2rem;
+}
+
+.pagination-nav__link {
+  border: 0;
+  padding: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer__links {
+  margin-bottom: 3rem;
+}
+
+.footer__title {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.footer__link-item {
+  color: var(--ifm-color-emphasis-700);
+}
+
+.docSidebarContainer_rKC_ {
+  border-right: 0;
+}
+
+.navbar__logo img {
+  height: 90%;
 }
