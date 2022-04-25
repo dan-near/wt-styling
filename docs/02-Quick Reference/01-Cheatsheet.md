@@ -48,3 +48,50 @@ Make sure you have authenticated as the sending account using [`near login`](#au
 ```txt
 near send <sender> <receiver> <# of NEAR>
 ```
+
+### Executing functions
+
+Smart contract functions can execute in two modes: **view** and **call** (or **change**).
+
+#### View mode
+
+View function calls are only allowed to read data from the smart contract. They do not:
+
+* Make any on-chain modifications
+* Have a signer
+* Make cross-contract calls
+* Transfer tokens
+* Cost gas
+
+```txt
+near view <contract> <method> <JSON argumenst>
+```
+
+For example:
+
+```txt
+$ NEAR_ENV=mainnet near view wrap.near ft_balance_of '{"account_id":"root.near"}'
+View call: wrap.near.ft_balance_of({ "account_id": "root.near" })
+'1000000000000000000000000'
+```
+
+:::tip
+If the arguments for your function call are long, complex, or are used often, you may want to put them in a separate `.json` file.
+
+You can use them in a command like so:
+```txt
+near view <contract> <method> "$(<path/to/args.json)"
+```
+:::
+
+#### Change mode
+
+Regular function calls perform activity on-chain and require a signer to pay gas fees.
+
+```txt
+near call <contract> <method> <JSON arguments> --account-id <signer>
+```
+
+:::tip
+Regular function calls can perform both change and view calls, but are required to pay gas fees regardless, so if you don't _have_ to perform a change, it's probably best to stick with view calls.
+:::
