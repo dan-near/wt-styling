@@ -6,6 +6,8 @@ The tutorial will cover the basic usages of `near-api-js` like wallet connection
 
 You can find the finished tutorial app [here](https://github.com/NEAR-Edu/near/tree/main/packages/cra-template-js/examples/tutorial-wrap).
 
+You can also find a CodeSandbox of the tutorial app [here](https://codesandbox.io/s/tutorial-wrap-near-3oqsfx?fontsize=14&hidenavigation=1&theme=dark).
+
 ## The steps
 
 The steps we will follow are layed out here:
