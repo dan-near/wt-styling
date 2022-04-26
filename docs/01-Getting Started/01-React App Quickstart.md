@@ -1,5 +1,3 @@
-## React Quickstart
-
 To start integrating `NEAR` in your React application, you can use the [`create-react-app`](https://create-react-app.dev/) template to bootstrap your project.
 
 **Note**: If you are looking for a more step by step approach you can check out the full tutorial [here](/docs/Getting%20Started/React%20Tutorial).

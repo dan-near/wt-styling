@@ -1,5 +1,3 @@
-## React Tutorial
-
 In this tutorial you will learn how to use `near-api-js` to interact with the blockchain in React applications.
 
 The tutorial will cover the basic usages of `near-api-js` like wallet connection, querying state in the blockchain and calling both `view` and `change` methods of smart contracts.
