@@ -1,6 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const mouseflowProjectId = '9acc4ace-c756-4350-8643-6804551eabe0'; // https://us.mouseflow.com/websites/9acc4ace-c756-4350-8643-6804551eabe0/dashboards/1d1091d4-e671-4a0b-932c-2dfb4b9f0dd5
+
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
@@ -161,6 +163,12 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+  scripts: [ // https://docusaurus.io/docs/api/docusaurus-config#scripts
+    {
+      src: `//cdn.mouseflow.com/projects/${mouseflowProjectId}.js`,
+      defer: true,
+    },
+  ],
 };
 
 module.exports = config;
