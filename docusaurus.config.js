@@ -9,8 +9,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'NEAR Welcome Track',
-  tagline:
-    'The NEAR Welcome Track is a guide for developers and entrepreneurs to get started in Web3 with NEAR',
+  tagline: 'The NEAR Welcome Track is a guide for developers and entrepreneurs to get started in Web3 with NEAR',
   url: 'https://near.university',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -27,15 +26,14 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root. https://docusaurus.io/docs/docs-introduction/#docs-only-mode and https://ricard.dev/how-to-set-docs-as-homepage-for-docusaurus/
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/NEAR-Edu/welcome-track/tree/main/',          
+          editUrl: 'https://github.com/NEAR-Edu/welcome-track/tree/main/',
           sidebarCollapsed: false, // https://docusaurus.io/docs/sidebar/items#expanded-categories-by-default
           sidebarCollapsible: true,
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -161,9 +159,11 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['rust'],
       },
     }),
-  scripts: [ // https://docusaurus.io/docs/api/docusaurus-config#scripts
+  scripts: [
+    // https://docusaurus.io/docs/api/docusaurus-config#scripts
     {
       src: `//cdn.mouseflow.com/projects/${mouseflowProjectId}.js`,
       defer: true,
