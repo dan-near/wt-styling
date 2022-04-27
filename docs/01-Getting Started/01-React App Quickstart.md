@@ -1,6 +1,10 @@
-To start integrating `NEAR` in your React application, you can use the [`create-react-app`](https://create-react-app.dev/) template to bootstrap your project.
+To start integrating NEAR in your React application, you can use the [Create React App](https://create-react-app.dev/) template to bootstrap your project.
 
-**Note**: If you are looking for a more step by step approach you can check out the full tutorial [here](/Getting%20Started/React%20Tutorial).
+:::note
+If you are looking for a more step by step approach, check out the [full tutorial](/Getting%20Started/React%20Tutorial).
+:::
+
+## Project Initialization
 
 Simply run the following command in your terminal:
 
@@ -14,11 +18,13 @@ or if using `yarn`:
 yarn create-react-app my-near-app --template near-js
 ```
 
-This will give you a new directory called `my-near-app` with a setup that allows you easy usage of [`near-api-js`](https://github.com/near/near-api-js) in your React application.
+This will create a new directory called `my-near-app` containing a React application preconfigured with [`near-api-js`](https://github.com/near/near-api-js).
+
+## Project Structure
 
 Your `App.jsx` file will look something like this:
 
-```jsx
+```jsx title="src/App.jsx"
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection, utils, Contract } from 'near-api-js';
 import { getConfig } from './config';
@@ -43,12 +49,8 @@ const App = () => {
       setContract(
         new Contract(wallet.account(), 'counter.testnet', {
           viewMethods: ['getCounter'],
-          changeMethods: [
-            'resetCounter',
-            'incrementCounter',
-            'decrementCounter',
-          ],
-        })
+          changeMethods: ['resetCounter', 'incrementCounter', 'decrementCounter'],
+        }),
       );
 
       wallet
@@ -69,12 +71,7 @@ const App = () => {
   const handleLogin = () => {
     wallet.requestSignIn({
       contractId: 'counter.testnet',
-      methodNames: [
-        'resetCounter',
-        'incrementCounter',
-        'decrementCounter',
-        'getCounter',
-      ],
+      methodNames: ['resetCounter', 'incrementCounter', 'decrementCounter', 'getCounter'],
     });
   };
 
@@ -112,25 +109,16 @@ const App = () => {
         <div>
           <div>Hi, {wallet.getAccountId()}!</div>
           <p>
-            Your account ballance is{' '}
-            <strong>{formatNearAmount(balance, 4)}</strong>
+            Your account ballance is <strong>{formatNearAmount(balance, 4)}</strong>
           </p>
           <p>
             The current value of the counter is: <strong>{counter}</strong>
           </p>
           <label htmlFor="deposit">
             <span>Deposit value (in yoctoNEAR): </span>
-            <input
-              id="deposit"
-              type="number"
-              min={1}
-              value={deposit}
-              onChange={({ target: { value } }) => setDeposit(parseInt(value))}
-            />
+            <input id="deposit" type="number" min={1} value={deposit} onChange={({ target: { value } }) => setDeposit(parseInt(value))} />
           </label>
-          <div
-            style={{ display: 'flex', flexDirection: 'column', width: '50%' }}
-          >
+          <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
             <button onClick={() => handleReset()}>Reset Counter</button>
             <button onClick={() => handleIncrement()}>Increment counter</button>
             <button onClick={() => handleDecrement()}>Decrement counter</button>
@@ -148,9 +136,13 @@ const App = () => {
 export default App;
 ```
 
-Here you have usage examples of the four main functionalities you will be using to interact with `NEAR`.
+## Usage Examples
 
-You can find the usage example of how to use `wallet` to sign users in and query the user's data.
+Here you have usage examples of the four main functionalities you will be using to interact with NEAR.
+
+### Sign-in and balance query
+
+You can find the usage example of how to use a [`WalletConnection`](https://near.github.io/near-api-js/classes/walletaccount.walletconnection.html) to sign users in and query the user's data.
 
 ```js
 const [wallet, setWallet] = useState(null);
@@ -158,12 +150,7 @@ const [wallet, setWallet] = useState(null);
 const handleLogin = () => {
   wallet.requestSignIn({
     contractId: 'counter.testnet',
-    methodNames: [
-      'resetCounter',
-      'incrementCounter',
-      'decrementCounter',
-      'getCounter',
-    ],
+    methodNames: ['resetCounter', 'incrementCounter', 'decrementCounter', 'getCounter'],
   });
 };
 
@@ -173,6 +160,8 @@ wallet
   .then(({ available }) => setBalance(available));
 ```
 
+### Calling view methods
+
 How to call view methods on smart contracts:
 
 ```js
@@ -180,6 +169,8 @@ contract.getCounter().then((counter) => {
   setCounter(counter);
 });
 ```
+
+### Calling change methods
 
 And how to call change methods on smart contracts:
 
@@ -192,4 +183,6 @@ await contract.incrementCounter({
 setCounter(await contract.getCounter());
 ```
 
-For a more in depth walkthrough of how to integrate NEAR in your React app, you can follow the [full tutorial](/Getting%20Started/React%20Tutorial).
+---
+
+For a more in-depth walkthrough of how to integrate NEAR in your React app, you can follow the [full tutorial](/Getting%20Started/React%20Tutorial).
