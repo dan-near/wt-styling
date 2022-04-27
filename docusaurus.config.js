@@ -23,8 +23,11 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/', // Serve the docs at the site's root. https://docusaurus.io/docs/docs-introduction/#docs-only-mode and https://ricard.dev/how-to-set-docs-as-homepage-for-docusaurus/
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/NEAR-Edu/welcome-track/tree/main/',
+          editUrl: 'https://github.com/NEAR-Edu/welcome-track/tree/main/',          
+          sidebarCollapsed: false, // https://docusaurus.io/docs/sidebar/items#expanded-categories-by-default
+          sidebarCollapsible: true,
         },
         blog: {
           showReadingTime: true,

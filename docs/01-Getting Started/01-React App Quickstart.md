@@ -1,6 +1,6 @@
 To start integrating `NEAR` in your React application, you can use the [`create-react-app`](https://create-react-app.dev/) template to bootstrap your project.
 
-**Note**: If you are looking for a more step by step approach you can check out the full tutorial [here](/docs/Getting%20Started/React%20Tutorial).
+**Note**: If you are looking for a more step by step approach you can check out the full tutorial [here](/Getting%20Started/React%20Tutorial).
 
 Simply run the following command in your terminal:
 
@@ -192,4 +192,4 @@ await contract.incrementCounter({
 setCounter(await contract.getCounter());
 ```
 
-For a more in depth walkthrough of how to integrate NEAR in your React app, you can follow the [full tutorial](/docs/Getting%20Started/React%20Tutorial).
+For a more in depth walkthrough of how to integrate NEAR in your React app, you can follow the [full tutorial](/Getting%20Started/React%20Tutorial).
