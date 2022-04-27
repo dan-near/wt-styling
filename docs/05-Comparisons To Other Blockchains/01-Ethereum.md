@@ -36,7 +36,7 @@ NEAR accounts can have any number of access keys attached to them. These keys ma
 
 Storage costs incurred on Ethereum are calculated as a part of the transaction fee and charged to the transaction signer. State variables are stored consecutively in a contiguous space in memory, which is divided into 32-byte slots. State variables are stored in the order they are declared, and multiple state variables that take up less than 32 bytes of space may be packed into the same slot.
 
-Permanent data storage on NEAR uses a key-value system which can only be accessed explicitly through the storage API. If a smart contract is written using a helper SDK like [`near-sdk-rs`](https://github.com/near/near-sdk-rs), the state of the main contract struct may be automatically managed in storage. Storage costs are charged to the *contract* (as opposed to the transaction signer) by locking a certain quantity of NEAR tokens in the contract's wallet. (Of course, smart contracts can pass this cost on to the transaction signer if desired.) The tokens are unlocked when the storage space is released.
+Permanent data storage on NEAR uses a key-value system which can only be accessed explicitly through the storage API. If a smart contract is written using a helper SDK like [`near-sdk-rs`](https://github.com/near/near-sdk-rs), the state of the main contract struct may be automatically managed in storage. Storage costs are charged to the _contract_ (as opposed to the transaction signer) by locking a certain quantity of NEAR tokens in the contract's wallet. (Of course, smart contracts can pass this cost on to the transaction signer if desired.) The tokens are unlocked when the storage space is released.
 
 ## Smart Contracts
 

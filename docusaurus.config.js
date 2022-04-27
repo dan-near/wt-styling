@@ -9,7 +9,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'NEAR Welcome Track',
-  tagline: 'The NEAR Welcome Track is a guide for developers and entrepreneurs to get started in Web3 with NEAR',
+  tagline:
+    'The NEAR Welcome Track is a guide for developers and entrepreneurs to get started in Web3 with NEAR',
   url: 'https://near.university',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -33,7 +34,8 @@ const config = {
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl:
+            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

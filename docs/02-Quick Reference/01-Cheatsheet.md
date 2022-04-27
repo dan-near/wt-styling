@@ -36,8 +36,8 @@ near login
 
 Keypairs are stored with the associated account ID in the following location:
 
-* Mac & Linux: `~/.near-credentials/<network>/<account id>.json`
-* Windows: `%USERPROFILE%/.near-credentials/<network>/<account id>.json`
+- Mac & Linux: `~/.near-credentials/<network>/<account id>.json`
+- Windows: `%USERPROFILE%/.near-credentials/<network>/<account id>.json`
 
 ### Sending tokens
 
@@ -57,11 +57,11 @@ Smart contract functions can execute in two modes: **view** and **call** (or **c
 
 View function calls are only allowed to read data from the smart contract. They do not:
 
-* Make any on-chain modifications
-* Have a signer
-* Make cross-contract calls
-* Transfer tokens
-* Cost gas
+- Make any on-chain modifications
+- Have a signer
+- Make cross-contract calls
+- Transfer tokens
+- Cost gas
 
 ```txt
 near view <contract> <method> <JSON argumenst>
@@ -79,9 +79,11 @@ View call: wrap.near.ft_balance_of({ "account_id": "root.near" })
 If the arguments for your function call are long, complex, or are used often, you may want to put them in a separate `.json` file.
 
 You can use them in a command like so:
+
 ```txt
 near view <contract> <method> "$(<path/to/args.json)"
 ```
+
 :::
 
 #### Change mode

@@ -49,7 +49,11 @@ const App = () => {
       setContract(
         new Contract(wallet.account(), 'counter.testnet', {
           viewMethods: ['getCounter'],
-          changeMethods: ['resetCounter', 'incrementCounter', 'decrementCounter'],
+          changeMethods: [
+            'resetCounter',
+            'incrementCounter',
+            'decrementCounter',
+          ],
         }),
       );
 
@@ -71,7 +75,12 @@ const App = () => {
   const handleLogin = () => {
     wallet.requestSignIn({
       contractId: 'counter.testnet',
-      methodNames: ['resetCounter', 'incrementCounter', 'decrementCounter', 'getCounter'],
+      methodNames: [
+        'resetCounter',
+        'incrementCounter',
+        'decrementCounter',
+        'getCounter',
+      ],
     });
   };
 
@@ -109,16 +118,25 @@ const App = () => {
         <div>
           <div>Hi, {wallet.getAccountId()}!</div>
           <p>
-            Your account ballance is <strong>{formatNearAmount(balance, 4)}</strong>
+            Your account ballance is{' '}
+            <strong>{formatNearAmount(balance, 4)}</strong>
           </p>
           <p>
             The current value of the counter is: <strong>{counter}</strong>
           </p>
           <label htmlFor="deposit">
             <span>Deposit value (in yoctoNEAR): </span>
-            <input id="deposit" type="number" min={1} value={deposit} onChange={({ target: { value } }) => setDeposit(parseInt(value))} />
+            <input
+              id="deposit"
+              type="number"
+              min={1}
+              value={deposit}
+              onChange={({ target: { value } }) => setDeposit(parseInt(value))}
+            />
           </label>
-          <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', width: '50%' }}
+          >
             <button onClick={() => handleReset()}>Reset Counter</button>
             <button onClick={() => handleIncrement()}>Increment counter</button>
             <button onClick={() => handleDecrement()}>Decrement counter</button>
@@ -150,7 +168,12 @@ const [wallet, setWallet] = useState(null);
 const handleLogin = () => {
   wallet.requestSignIn({
     contractId: 'counter.testnet',
-    methodNames: ['resetCounter', 'incrementCounter', 'decrementCounter', 'getCounter'],
+    methodNames: [
+      'resetCounter',
+      'incrementCounter',
+      'decrementCounter',
+      'getCounter',
+    ],
   });
 };
 
