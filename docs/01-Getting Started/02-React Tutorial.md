@@ -25,7 +25,11 @@ Checkout the official docs to get started creating a NEAR account [here](https:/
 
 The `cra-template-near-js` Create React App template sets up a React application preconfigured with [near-api-js](https://github.com/near/near-api-js).
 
-To start your project type `npx create-react-app --template near-js wrap-near-app` into a terminal. This will create a new directory `wrap-near-app` based on `cra-template-near-js` (see [Selecting a template](https://create-react-app.dev/docs/getting-started#selecting-a-template)).
+To start your project type 
+```shell
+npx create-react-app --template near-js wrap-near-app
+```
+into a terminal. This will create a new directory `wrap-near-app` based on `cra-template-near-js` (see [Selecting a template](https://create-react-app.dev/docs/getting-started#selecting-a-template)).
 
 ### 3. Create a landing page
 
