@@ -1,4 +1,4 @@
-@import "~gleap/build/index.min.css"; /* https://gleap.io/docs/javascript/ */
+@import '~gleap/build/index.min.css'; /* https://gleap.io/docs/javascript/ */
 
 /**
  * Any CSS included here will be global. The classic template
@@ -145,4 +145,8 @@ h6 {
 
 .navbar__logo img {
   height: 90%;
+}
+
+hr {
+  opacity: 0.2;
 }
