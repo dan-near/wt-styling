@@ -37,7 +37,7 @@ into a terminal. This will create a new directory `wrap-near-app` based on `cra-
 
 To create a landing page we'll edit `src/App.jsx` placing a sign in button onto the page.
 
-```jsx
+```jsx {2,8-10,13-16}
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection } from 'near-api-js';
 import { getConfig } from './config';
@@ -66,13 +66,13 @@ export default function App() {
 
 - **Line 2** - import `connect` and `WalletConnection` from [near-api-js](https://github.com/near/near-api-js).
 - **Line 8-10** - establish a connection with the NEAR testnet.
-- **Line 11-15** - request a sign in with the `wrap.testnet` contract (using `near_deposit` and `near_withdraw` methods of the contract).
+- **Line 13-16** - request a sign in with the `wrap.testnet` contract (using `near_deposit` and `near_withdraw` methods of the contract).
 
 ### 4. Wrap NEAR on form submit
 
 Next we'll add a form to wrap NEAR.
 
-```jsx
+```jsx {18-26,38-41,47-58}
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection, utils, Contract } from 'near-api-js';
 import { getConfig } from './config';
@@ -95,7 +95,7 @@ export default function App() {
       setContract(
         new Contract(wallet.account(), 'wrap.testnet', {
           changeMethods: ['near_deposit'],
-        })
+        }),
       );
     }
   }, [wallet]);
@@ -137,12 +137,12 @@ export default function App() {
 ```
 
 - **Line 18-26** - define a NEAR smart contract interface
-- **Line 47-58** - form to collect the amount of NEAR to wrap from user input
 - **Line 35-42** - call the `near_deposit` method attaching `amount` of NEAR for wrapping
+- **Line 47-58** - form to collect the amount of NEAR to wrap from user input
 
 ### 5. View wrapped balance on mount
 
-```jsx
+```jsx {24,32-33,34,57}
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection, utils, Contract } from 'near-api-js';
 import { getConfig } from './config';
@@ -167,7 +167,7 @@ export default function App() {
         new Contract(wallet.account(), 'wrap.testnet', {
           changeMethods: ['near_deposit'],
           viewMethods: ['ft_balance_of'],
-        })
+        }),
       );
     }
   }, [wallet]);
@@ -224,7 +224,7 @@ export default function App() {
 
 ### 6. Unwrap NEAR on form submit
 
-```jsx
+```jsx {24,49-63,71-77}
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection, utils, Contract } from 'near-api-js';
 import { getConfig } from './config';
@@ -250,7 +250,7 @@ export default function App() {
         new Contract(wallet.account(), 'wrap.testnet', {
           changeMethods: ['near_deposit', 'near_withdraw'],
           viewMethods: ['ft_balance_of'],
-        })
+        }),
       );
     }
   }, [wallet]);
@@ -324,4 +324,4 @@ export default function App() {
 
 - **Line 24** - add `near_withdraw` to the contract interface
 - **Line 49-63** - check if wrap or unwrap is selected then call either `near_deposit` or `near_withdraw`
-- **Line 71-78** - add select input to form to allow method selection
+- **Line 71-77** - add select input to form to allow method selection
