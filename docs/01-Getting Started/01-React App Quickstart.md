@@ -150,7 +150,7 @@ export default App;
 
 Here you have usage examples of the four main functionalities you will be using to interact with `NEAR`.
 
-You can find the usage example of how to use `wallets` to sign users in and query the users data.
+You can find the usage example of how to use `wallet` to sign users in and query the user's data.
 
 ```js
 const [wallet, setWallet] = useState(null);
