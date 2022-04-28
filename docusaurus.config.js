@@ -57,9 +57,15 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'Developers/intro',
             position: 'left',
             label: 'NEAR for React devs',
+          },
+          {
+            type: 'doc',
+            docId: 'Entrepreneurs/intro',
+            position: 'left',
+            label: 'NEAR for entrepreneurs',
           },
           /*{
             to: '/blog', 
