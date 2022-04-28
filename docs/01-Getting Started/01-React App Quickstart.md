@@ -40,10 +40,12 @@ const App = () => {
   const [deposit, setDeposit] = useState(0);
   const [balance, setBalance] = useState('');
 
+  // Establish a connection to the NEAR blockchain on component mount
   useEffect(() => {
     connect(getConfig()).then((near) => setWallet(new WalletConnection(near)));
   }, []);
 
+  // Initialize the contract object when the wallet is available
   useEffect(() => {
     if (wallet) {
       setContract(
@@ -57,6 +59,8 @@ const App = () => {
         }),
       );
 
+      // We can get the account balance of a user through the wallet
+      // Since this is requesting data from the blockchain, the method returns a Promise
       wallet
         .account()
         .getAccountBalance()
@@ -64,14 +68,21 @@ const App = () => {
     }
   }, [wallet]);
 
+  const isSignedIn = Boolean(wallet && wallet.isSignedIn() && contract);
+
+  // Update the counter value when the contract is available
+  // (which means that the user is signed in and the contract has been initialized)
+  // Calling contract functions is similar to calling API endpoints in traditional web apps
+  // The call happens asynchronously and the result is returned in a Promise
   useEffect(() => {
-    if (wallet && wallet.isSignedIn() && contract) {
+    if (isSignedIn) {
       contract.getCounter().then((counter) => {
         setCounter(counter);
       });
     }
-  }, [wallet, contract]);
+  }, [contract, isSignedIn]);
 
+  // Handle the sign in call by requesting a sign in through the NEAR Wallet
   const handleLogin = () => {
     wallet.requestSignIn({
       contractId: 'counter.testnet',
@@ -85,15 +96,19 @@ const App = () => {
   };
 
   const handleReset = async () => {
+    // Call the reset function on the counter contract
+    // We have to deposit at least one yoctoNEAR (1e-24 NEAR) to be able to call change functions
     await contract.resetCounter({
       args: {},
       amount: deposit.toFixed(0),
     });
 
+    // When calling view functions, we don't need to deposit
     setCounter(await contract.getCounter());
   };
 
   const handleIncrement = async () => {
+    // Call the increment function on the counter contract
     await contract.incrementCounter({
       args: { value: 1 },
       amount: deposit.toFixed(0),
@@ -103,6 +118,7 @@ const App = () => {
   };
 
   const handleDecrement = async () => {
+    // Call the decrement function on the counter contract
     await contract.decrementCounter({
       args: { value: 1 },
       amount: deposit.toFixed(0),
@@ -114,11 +130,14 @@ const App = () => {
   return (
     <section>
       <h1>🎉 Congrats on starting your NEAR journey in React! 🎉</h1>
-      {wallet && wallet.isSignedIn() ? (
+      {/* Only show the sign in button when the user is not signed in */}
+      {isSignedIn ? (
         <div>
+          {/* We can get the account id of the currently signed in user through the wallet */}
           <div>Hi, {wallet.getAccountId()}!</div>
           <p>
             Your account ballance is{' '}
+            {/* The balance will be retrieved in yoctoNEAR so we have to format it to a NEAR amount */}
             <strong>{formatNearAmount(balance, 4)}</strong>
           </p>
           <p>
@@ -208,4 +227,10 @@ setCounter(await contract.getCounter());
 
 ---
 
+## Next Steps
+
 For a more in-depth walkthrough of how to integrate NEAR in your React app, you can follow the [full tutorial](/Getting%20Started/React%20Tutorial).
+
+If you want to explore some quick code examples, you can check out the Quick Reference section with the [Cheatsheet](/Quick%20Reference/Cheatsheet) and [Cookbook](/Quick%20Reference/Cookbook). In this section you can also find out about other useful NEAR resources in the [Useful Links](/Quick%20Reference/Useful%20Links) section.
+
+Interested in theory and how Web3 apps are different from Web2 apps? Start with the [Architecture](/Theory/Application%20Architecture) and [Account](/Protocol/Accounts) explainers.
