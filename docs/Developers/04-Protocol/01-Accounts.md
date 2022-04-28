@@ -1,4 +1,4 @@
-On-chain transactions represent a change to some portion of the state of the blockchain. Every account comprises a portion of the state. The state contains information like balances, [code](/Protocol/Smart%20Contracts), [access keys](/Protocol/Access%20Keys), and [smart contract storage](/Protocol/Storage).
+On-chain transactions represent a change to some portion of the state of the blockchain. Every account comprises a portion of the state. The state contains information like balances, [code](/Develpoers/Protocol/Smart%20Contracts), [access keys](/Developers/Protocol/Access%20Keys), and [smart contract storage](/Develpoers/Protocol/Storage).
 
 ## Account Identifiers
 
