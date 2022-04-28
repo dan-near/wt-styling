@@ -18,6 +18,17 @@ const config = {
   favicon: 'img/near-favicon.png',
   organizationName: 'NEAR-Edu', // Usually your GitHub org/user name.
   projectName: 'welcome-track', // Usually your repo name.
+  "scripts": [
+    "https://buttons.github.io/buttons.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js",
+    "https://use.fontawesome.com/releases/v5.15.4/js/all.js",
+    "/js/copy-code-button.js",
+  ],
+  "stylesheets": [
+    "https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap",
+    "https://cdn.statically.io/gh/nearprotocol/near-global-footer/acdefee/footer.css",
+    "/css/copy-code-button.css",
+  ],
 
   presets: [
     [
