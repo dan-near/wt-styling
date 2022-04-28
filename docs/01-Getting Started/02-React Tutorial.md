@@ -1,4 +1,10 @@
 In this tutorial you will learn how to use `near-api-js` to interact with the blockchain in React applications.
+We will interact with the `wrap` contract for NEAR tokens. The contract allows us to wrap NEAR tokens into wNEAR (essentialy minting a different kind of fungible token).
+Wrapping tokens is a way of representing a cryptocurrency from another blockchain, or any other asset, in the original currency (pegging the to the value of the other asset). The wrapped token allows the asset to be used on the original blockchain for using that blockchains functionality, while preserving the original value making it possible to later trade the wrapped token for the original asset.
+
+:::note
+If you would like to explore wrapped tokens in more detail, you can check out [this article](https://academy.binance.com/en/articles/what-are-wrapped-tokens) by [Binance Academy](https://academy.binance.com/).
+:::
 
 The tutorial will cover the basic usages of `near-api-js` like wallet connection, querying state in the blockchain and calling both `view` and `change` methods of smart contracts.
 
@@ -70,9 +76,12 @@ export default function App() {
 
 ### 4. Wrap NEAR on form submit
 
-Next we'll add a form to wrap NEAR.
+Next we'll add a form to wrap NEAR like in the code below.
 
-```jsx {18-26,38-41,47-58}
+First, we will initialize our contract interface inside a `useEffect` hook.
+Then, we'll add the form containing an `<input>` element for the amount of NEAR to wrap.
+
+```jsx {2,5-7,11,12,18-26,28,40-43,48-50,51-62}
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection, utils, Contract } from 'near-api-js';
 import { getConfig } from './config';
@@ -100,6 +109,8 @@ export default function App() {
     }
   }, [wallet]);
 
+  const isSignedIn = Boolean(wallet && wallet.isSignedIn() && contract);
+
   const handleLogin = () => {
     wallet.requestSignIn({
       contractId: 'wrap.testnet',
@@ -118,7 +129,9 @@ export default function App() {
 
   return (
     <div>
-      <button onClick={() => handleLogin()}>Login with NEAR</button>
+      {!isSignedIn && (
+        <button onClick={() => handleLogin()}>Login with NEAR</button>
+      )}
       <form onSubmit={handleSubmit}>
         <label>
           Deposit:
@@ -136,13 +149,25 @@ export default function App() {
 }
 ```
 
+- **Line 2** - import `utils` and `Contract` from [near-api-js](https://github.com/near/near-api-js).
+- **Line 5-7** - destructure the `parseNearAmount` function from `utils`.
+- **Line 11** - add a `useState` hook to store the NEAR amount.
+- **Line 12** - add a `useState` hook to store the contract object.
 - **Line 18-26** - define a NEAR smart contract interface
-- **Line 35-42** - call the `near_deposit` method attaching `amount` of NEAR for wrapping
-- **Line 47-58** - form to collect the amount of NEAR to wrap from user input
+- **Line 28** - add a `isSignedIn` variable to check if the user is logged in.
+- **Line 40-43** - call the `near_deposit` method attaching `amount` of NEAR for wrapping
+- **Line 48-50** - remove the sign in button if user is signed in.
+- **Line 51-62** - form to collect the amount of NEAR to wrap from user input
 
 ### 5. View wrapped balance on mount
 
-```jsx {24,32-33,34,57}
+Now we are going to add balance checking to our app.
+
+We have to update the contract interface to include the `ft_balance_of` method.
+We will add a `useEffect` hook to fetch the balance of the wrapped NEAR.
+Then we add a `<p>` element to display the balance.
+
+```jsx {6,13,24,34-35,36,61}
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection, utils, Contract } from 'near-api-js';
 import { getConfig } from './config';
@@ -172,13 +197,15 @@ export default function App() {
     }
   }, [wallet]);
 
+  const isSignedIn = Boolean(wallet && wallet.isSignedIn() && contract);
+
   useEffect(() => {
-    if (wallet && wallet.isSignedIn() && contract) {
+    if (isSignedIn) {
       contract
         .ft_balance_of({ account_id: wallet.getAccountId() })
         .then((balance) => setBalance(formatNearAmount(balance)));
     }
-  }, [wallet, contract]);
+  }, [wallet, contract, isSignedIn]);
 
   const handleLogin = () => {
     wallet.requestSignIn({
@@ -198,7 +225,9 @@ export default function App() {
 
   return (
     <div>
-      <button onClick={() => handleLogin()}>Login with NEAR</button>
+      {!isSignedIn && (
+        <button onClick={() => handleLogin()}>Login with NEAR</button>
+      )}
       <p>Current Wrapped Balance: {balance}</p>
       <form onSubmit={handleSubmit}>
         <label>
@@ -217,14 +246,22 @@ export default function App() {
 }
 ```
 
+- **Line 6** - destructure the `formatNearAmount` function from `utils`.
+- **Line 13** - add a `useState` hook to store the wNEAR balance.
 - **Line 24** - add `ft_balance_of` to the contract interface
-- **Line 32-33** - call the `ft_balance_of` method passing the `account_id` argument
-- **Line 34** - receive the wrapped NEAR balance and convert yoctoNEAR to NEAR.
-- **Line 57** - display the balance
+- **Line 34-35** - call the `ft_balance_of` method passing the `account_id` argument
+- **Line 36** - receive the wrapped NEAR balance and convert yoctoNEAR to NEAR.
+- **Line 61** - display the balance
 
 ### 6. Unwrap NEAR on form submit
 
-```jsx {24,49-63,71-77}
+The final piece of the puzzle is allowing the user to also unwrap wNEAR into NEAR.
+
+To add this functionality we need to update the contract interface to include the `near_withdraw` method.
+Then we have to add a `<select>` element to allow the user to choose what action they want to perform (`wrap` or `unwrap`).
+Finally we have to handle the different cases in our `handleSubmit` function.
+
+```jsx {14,24,51-65,75-82}
 import React, { useEffect, useState } from 'react';
 import { connect, WalletConnection, utils, Contract } from 'near-api-js';
 import { getConfig } from './config';
@@ -255,13 +292,15 @@ export default function App() {
     }
   }, [wallet]);
 
+  const isSignedIn = Boolean(wallet && wallet.isSignedIn() && contract);
+
   useEffect(() => {
-    if (wallet && wallet.isSignedIn() && contract) {
+    if (isSignedIn) {
       contract
         .ft_balance_of({ account_id: wallet.getAccountId() })
         .then((balance) => setBalance(formatNearAmount(balance)));
     }
-  }, [wallet, contract]);
+  }, [wallet, contract, isSignedIn]);
 
   const handleLogin = () => {
     wallet.requestSignIn({
@@ -292,12 +331,15 @@ export default function App() {
 
   return (
     <div>
-      <button onClick={() => handleLogin()}>Login with NEAR</button>
+      {!isSignedIn && (
+        <button onClick={() => handleLogin()}>Login with NEAR</button>
+      )}
       <p>Current Wrapped Balance: {balance}</p>
       <form onSubmit={handleSubmit}>
         <select
           defaultValue={method}
           onChange={({ target: { value } }) => setMethod(value)}
+          style={{ marginRight: '1rem' }}
         >
           <option value="wrap">Wrap NEAR</option>
           <option value="unwrap">Unwrap NEAR</option>
@@ -322,6 +364,7 @@ export default function App() {
 }
 ```
 
+- **Line 14** - add a `useState` hook to store the method.
 - **Line 24** - add `near_withdraw` to the contract interface
-- **Line 49-63** - check if wrap or unwrap is selected then call either `near_deposit` or `near_withdraw`
-- **Line 71-77** - add select input to form to allow method selection
+- **Line 51-65** - check if wrap or unwrap is selected then call either `near_deposit` or `near_withdraw`
+- **Line 75-82** - add select input to form to allow method selection
